@@ -5,7 +5,6 @@
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,6 +24,6 @@ body {
     )
     rgb(var(--background-start-rgb)); */
   background-color: #fff9e4;
-  overflow: hidden;
+  overflow-x: hidden;
   justify-self: center;
 }

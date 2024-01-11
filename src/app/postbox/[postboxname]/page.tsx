@@ -2,10 +2,13 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-export default function MainPage() {
-  const router = useRouter();
+export default function page({ params }: { params: { postboxname: string } }) {
+  const postName = decodeURI(params.postboxname);
   return (
     <div className="flex flex-col items-center mt-[6em]">
+      <div className="mb-[1.3rem] mt-[1.2rem] text-[#BA4040] text-[1.75rem] font-[700]  h-[2.6875rem]">
+        {postName} 입니다.
+      </div>
       <Image
         className="ml-[5rem] mr-[5.5rem]"
         src={"/postbox.svg"}
@@ -20,23 +23,7 @@ export default function MainPage() {
           <button
             className={`w-[20.125rem] h-[3.625rem]  text-[#FFF9E4] rounded-2xl border-dashed border-btnborder border-2 bg-btn m-[0.19rem]`}
           >
-            내 우체통 들어가기
-          </button>
-        </div>
-        <div className={"w-btn h-btn bg-btn rounded-2xl"}>
-          <button
-            onClick={() => router.push("/makeletter")}
-            className={`w-[20.125rem] h-[3.625rem] text-[#FFF9E4] rounded-2xl border-dashed border-btnborder border-2 bg-btn m-[0.19rem]`}
-          >
-            내 우체통 만들기
-          </button>
-        </div>
-        <div className={"w-btn h-btn bg-btn rounded-2xl"}>
-          <button
-            onClick={() => router.push("/")}
-            className={`w-[20.125rem] h-[3.625rem] text-[#FFF9E4] rounded-2xl border-dashed border-btnborder border-2 bg-btn m-[0.19rem]`}
-          >
-            다른 우체통 찾기
+            편지 쓰기
           </button>
         </div>
       </div>

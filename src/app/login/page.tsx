@@ -17,7 +17,7 @@ export default function Letter() {
           <div className="flex flex-col gap-[0.75rem]">
             <div className="text-[0.875rem]">아이디</div>
             <input
-              className="w-[17.5rem] h-[2.3125rem] bg-[#FCF2DD] text-[0.8125rem] rounded-[0.5rem] text-center"
+              className="w-[17.5rem] h-[2.3125rem] bg-[#FCF2DD] text-[0.8125rem] rounded-[0.5rem] p-4"
               type="text"
               placeholder="5자 이하로 입력해주세요"
             />
@@ -25,7 +25,7 @@ export default function Letter() {
           <div className="flex flex-col gap-[0.75rem]">
             <div className="text-[0.875rem]">비밀번호</div>
             <input
-              className="w-[17.5rem] h-[2.3125rem] bg-[#FCF2DD] text-[0.8125rem] rounded-[0.5rem] text-center"
+              className="w-[17.5rem] h-[2.3125rem] bg-[#FCF2DD] text-[0.8125rem] rounded-[0.5rem] p-4"
               type="text"
               placeholder="영문 + 숫자 조합으로 8자 이상 입력해 주세요."
             />
@@ -33,6 +33,10 @@ export default function Letter() {
         </div>
       </div>
       <button
+        onClick={() => {
+          alert("login success");
+          router.push("/letterlist");
+        }}
         className={`mt-[3.38rem] w-[20.125rem] h-[3.625rem] text-[#FFF9E4] rounded-2xl border-dashed border-btnborder border-2 bg-btn`}
       >
         우체통 들아가기
