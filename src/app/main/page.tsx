@@ -18,6 +18,9 @@ export default function MainPage() {
       >
         <div className={"w-btn h-btn bg-btn rounded-2xl"}>
           <button
+            onClick={() => {
+              router.push(`/login`);
+            }}
             className={`w-[20.125rem] h-[3.625rem]  text-[#FFF9E4] rounded-2xl border-dashed border-btnborder border-2 bg-btn m-[0.19rem]`}
           >
             내 우체통 들어가기
@@ -33,7 +36,7 @@ export default function MainPage() {
         </div>
         <div className={"w-btn h-btn bg-btn rounded-2xl"}>
           <button
-            onClick={() => router.push("/")}
+            onClick={() => router.push("/letterSearch")}
             className={`w-[20.125rem] h-[3.625rem] text-[#FFF9E4] rounded-2xl border-dashed border-btnborder border-2 bg-btn m-[0.19rem]`}
           >
             다른 우체통 찾기

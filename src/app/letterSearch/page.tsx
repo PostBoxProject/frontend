@@ -28,7 +28,7 @@ export default function LetterSearch() {
       <button
         onClick={() => {
           alert("search success");
-          router.push(`/postBox/${postName}`);
+          router.push(`/postbox/${postName}`);
         }}
         className={`mt-[3.38rem] w-[20.125rem] h-[3.625rem] text-[#FFF9E4] rounded-2xl border-dashed border-btnborder border-2 bg-btn`}
       >

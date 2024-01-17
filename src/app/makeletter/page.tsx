@@ -51,6 +51,7 @@ export default function Letter() {
       <button
         onClick={() => {
           alert("Success");
+          router.push("/main");
         }}
         className={`mt-[3.38rem] w-[20.125rem] h-[3.625rem] text-[#FFF9E4] rounded-2xl border-dashed border-btnborder border-2 bg-btn`}
       >
