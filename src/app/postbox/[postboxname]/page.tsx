@@ -6,13 +6,30 @@ import { ChangeEvent, useState } from "react";
 export default function Page({ params }: { params: { postboxname: string } }) {
   const postName = decodeURI(params.postboxname);
   const [isOpen, setIsopen] = useState(false);
+  const [content, setContent] = useState("hi");
   const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e.target.value);
+    setContent(e.target.value);
   };
   const onClick = () => {
     setIsopen((prev) => {
       return !prev;
     });
+  };
+  const onSend = () => {
+    fetch("/api/letters", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        description: content,
+        postboxId: 1,
+      }),
+    })
+      .then((response) => response.json())
+      .catch((err) => console.log(err))
+      .then((data) => console.log(data));
+    setIsopen(false);
   };
   return (
     <div className="flex flex-col items-center mt-[6em]">
@@ -55,7 +72,10 @@ export default function Page({ params }: { params: { postboxname: string } }) {
                 height={45}
               ></Image>
             </button>
-            <button className="mt-2 h-[2.6rem] border-dashed border-btnborder  text-[#FFF9E4] rounded-xl border-2 bg-btn m-[0.19rem]">
+            <button
+              onClick={onSend}
+              className="mt-2 h-[2.6rem] border-dashed border-btnborder  text-[#FFF9E4] rounded-xl border-2 bg-btn m-[0.19rem]"
+            >
               보내기
             </button>
           </div>
