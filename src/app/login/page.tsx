@@ -34,7 +34,8 @@ export default function Letter() {
           console.error("Login failed:", data);
           setError("Login failed. Please check your credentials.");
         }else{
-          localStorage.setItem("acess-token", data.access_token);
+          console.log('toekn1', data.accessToken)          
+          localStorage.setItem("access-token", data.accessToken);
           // 로그인 성공 시 페이지 전환
           router.push(`/letterlist/${name}`);
         }        
