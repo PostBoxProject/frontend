@@ -36,7 +36,7 @@ export default function LetterSearch() {
       <div className="mb-[1.3rem] mt-[1.2rem] text-[#BA4040] text-[1.75rem] font-[700]  h-[2.6875rem]">
         우체통 찾기
       </div>
-      <div className="flex flex-col bg-white w-[20rem] h-[30rem] shadow-modal rounded-[1.0625rem] items-center p-4">
+      <div className="flex flex-col bg-white w-[20rem] h-[30rem] shadow-modal rounded-[1.0625rem] p-4">
         <div className="flex flex-col items-center mb-4">
           <div className="text-[1.25rem] h-[2.875rem] leading-[2.875rem] text-center ">
             <span className="font-bold">우체통</span> 이름을 검색해 주세요
@@ -56,13 +56,11 @@ export default function LetterSearch() {
             </button>
           </div>
         </div>
-        <div className="list-container">
-          {searchResults.map((item, index) => (
-            <div key={index} className="list-item" onClick={() => { router.push(`/postbox/${item.id}`); }}>
-              
+        <div className="list-container text-left ml-7">
+          {searchResults.map((item, index) => (            
+            <div key={index} className="list-item" onClick={() => { router.push(`/postbox/${item.id}-${item.name}`); }}>              
               <p >Name: {item.name}</p>
-              <p >Email: {item.email}</p>
-              
+              <p >Email: {item.email}</p>              
               {index !== searchResults.length - 1 && <hr className="my-3 border-gray-300" />}
             </div>
           ))}
