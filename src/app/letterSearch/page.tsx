@@ -1,14 +1,18 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 export default function LetterSearch() {
   const router = useRouter();
+  const pathName = usePathname();
+  const searchParams = useSearchParams();
   const [postName, setPostName] = useState<String>("");
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPostName(e.target.value);
   };
+  const [validPostbox, setValidPostbox] = useState<Boolean>(false);
+  const [postboxID, setPostboxID] = useState<string>("");
   return (
     <div className="flex flex-col items-center">
       <div className="mb-[1.3rem] mt-[1.2rem] text-[#BA4040] text-[1.75rem] font-[700]  h-[2.6875rem]">
@@ -27,8 +31,28 @@ export default function LetterSearch() {
       </div>
       <button
         onClick={() => {
-          alert("search success");
-          router.push(`/postbox/${postName}`);
+          // alert("search success");
+          fetch(`/api/postboxs/${postName}?pageNo=1&pageSize=10`, {
+            method: "GET",
+          })
+            .then((response) => {
+              // if (response.status == ) response.json();
+              if (response.status == 200) {
+                setValidPostbox(true);
+                return response.json();
+              }
+            })
+            .catch((err) => console.log(err))
+            .then((data) => {
+              console.log(data);
+              setPostboxID(data.items[0].id);
+            });
+          if (validPostbox) {
+            alert("Search  Successful");
+            router.push(`/postbox/${postName}/${postboxID}`);
+          } else {
+            alert("Failed to find the postbox");
+          }
         }}
         className={`mt-[3.38rem] w-[20.125rem] h-[3.625rem] text-[#FFF9E4] rounded-2xl border-dashed border-btnborder border-2 bg-btn`}
       >

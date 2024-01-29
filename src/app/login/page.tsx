@@ -7,6 +7,7 @@ export default function Letter() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [pwd, setPwd] = useState("");
+  const [validation, setValidation] = useState(false);
 
   const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -26,13 +27,22 @@ export default function Letter() {
         password: pwd,
       }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status == 201) {
+          setValidation(true);
+          return response.json();
+        } else {
+          alert("Login Failed");
+        }
+      })
       .then((data) => {
         console.log(data);
-        localStorage.setItem("acess-token", data.access_token);
+        // localStorage.setItem("acess-token", data.access_token);
       });
     //error 처리
-    router.push(`/letterlist/${name}`);
+    if (validation) {
+      router.push(`/letterlist/${name}`);
+    }
   };
   return (
     <div className="flex flex-col items-center">

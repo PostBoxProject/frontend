@@ -1,9 +1,13 @@
 "use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+
 import { ChangeEvent, useState } from "react";
 
-export default function Page({ params }: { params: { postboxname: string } }) {
+export default function Page({
+  params,
+}: {
+  params: { postboxname: string; id: string };
+}) {
   const postName = decodeURI(params.postboxname);
   const [isOpen, setIsopen] = useState(false);
   const [content, setContent] = useState("hi");
@@ -23,12 +27,13 @@ export default function Page({ params }: { params: { postboxname: string } }) {
       },
       body: JSON.stringify({
         description: content,
-        postboxId: 1,
+        postboxId: params.id,
       }),
     })
       .then((response) => response.json())
       .catch((err) => console.log(err))
       .then((data) => console.log(data));
+    alert("Successfully Send");
     setIsopen(false);
   };
   return (
