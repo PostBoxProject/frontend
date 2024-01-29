@@ -7,6 +7,7 @@ export default function Letter() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [pwd, setPwd] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -29,23 +30,36 @@ export default function Letter() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        localStorage.setItem("acess-token", data.access_token);
+        if (data.error && data.error === 'Unauthorized') {
+          console.error("Login failed:", data);
+          setError("Login failed. Please check your credentials.");
+        }else{
+          localStorage.setItem("acess-token", data.access_token);
+          // 로그인 성공 시 페이지 전환
+          router.push(`/letterlist/${name}`);
+        }        
+      })
+      .catch((error) => {
+        console.error("Unexpected error during login:", error);
+               
       });
-    //error 처리
-    router.push(`/letterlist/${name}`);
   };
+
   return (
     <div className="flex flex-col items-center">
       <div className="mb-[1.3rem] mt-[1.2rem] text-[#BA4040] text-[1.75rem] font-[700] w-[14.4375rem] h-[2.6875rem]">
         내 우체통 들어가기
       </div>
+      {error && (
+        <div className="text-red-500 mb-2">{/* 실패 메시지를 표시하는 부분 */}</div>
+      )}
       <div className="flex flex-col bg-white w-[20.3125rem] h-[18rem] shadow-modal rounded-[1.0625rem] items-center">
         <div className="text-[1.25rem] h-[2.875rem] leading-[2.875rem] text-center ">
           <span className="font-bold">우체통</span> 정보를 입력해주세요
         </div>
         <div className="flex flex-col gap-[1.25rem] mt-[2.06rem]">
           <div className="flex flex-col gap-[0.75rem]">
-            <div className="text-[0.875rem]">이메일</div>
+            <div className="text-[0.875rem]">name</div>
             <input
               className="w-[17.5rem] h-[2.3125rem] bg-[#FCF2DD] text-[0.8125rem] rounded-[0.5rem] p-4"
               type="text"
@@ -73,3 +87,7 @@ export default function Letter() {
     </div>
   );
 }
+
+
+
+
