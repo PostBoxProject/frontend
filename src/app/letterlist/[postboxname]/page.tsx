@@ -9,12 +9,16 @@ type LetterDetail = {
   read: boolean;
 };
 
-export default function Letterlist({ params }: { params: { id: string } }) {
+export default function Letterlist({
+  params,
+}: {
+  params: { postboxname: string };
+}) {
   const [isOpen, setIsopen] = useState(false);
   const [letterList, setLetterList] = useState<LetterDetail[]>([]);
   const [letterID, setLetterID] = useState("");
   const [letter, setletter] = useState<LetterDetail>();
-  const id = decodeURI(params.id);
+  const id = decodeURI(params.postboxname);
 
   const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setLetterID(e.currentTarget.id);
@@ -26,7 +30,7 @@ export default function Letterlist({ params }: { params: { id: string } }) {
       .then((res) => res.json())
       .then((data: any) => {
         console.log(data);
-        setletter(data.description);
+        setletter(data);
       });
   };
 
