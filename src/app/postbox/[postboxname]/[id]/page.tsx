@@ -3,12 +3,9 @@ import Image from "next/image";
 
 import { ChangeEvent, useState } from "react";
 
-export default function Page({
-  params,
-}: {
-  params: { postboxname: string; id: string };
-}) {
+export default function Page({ params }: { params: { postboxname: string } }) {
   const postName = decodeURI(params.postboxname);
+  const [id, name] = postName.split("-");
   const [isOpen, setIsopen] = useState(false);
   const [content, setContent] = useState("hi");
   const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -27,7 +24,7 @@ export default function Page({
       },
       body: JSON.stringify({
         description: content,
-        postboxId: params.id,
+        postboxId: parseInt(id),
       }),
     })
       .then((response) => response.json())
@@ -39,7 +36,7 @@ export default function Page({
   return (
     <div className="flex flex-col items-center mt-[6em]">
       <div className="mb-[1.3rem] mt-[1.2rem] text-[#BA4040] text-[1.75rem] font-[700]  h-[2.6875rem]">
-        {postName} 입니다.
+        {name} 의 postbox입니다.
       </div>
       <Image
         className="ml-[5rem] mr-[5.5rem]"

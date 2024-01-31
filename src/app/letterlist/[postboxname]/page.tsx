@@ -23,7 +23,7 @@ export default function Letterlist({
   const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setLetterID(e.currentTarget.id);
     setIsopen(true);
-    fetch(`/api/letters/${e.currentTarget.id}`, {
+    fetch(`/api/letters/postbox`, {
       headers: { Authorization: localStorage.getItem("acess-token")! },
       method: "GET",
     })
@@ -35,7 +35,12 @@ export default function Letterlist({
   };
 
   useEffect(() => {
-    fetch("/api/letters", {
+    console.log('toekn2',localStorage);
+    console.log('toekn2',localStorage.getItem("access-token"));
+    fetch(`/api/letters/postbox`, {
+      headers: { 
+        Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+      },
       method: "GET",
     })
       .then((response) => response.json())

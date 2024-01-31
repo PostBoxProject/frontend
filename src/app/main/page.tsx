@@ -36,7 +36,7 @@ export default function MainPage() {
         </div>
         <div className={"w-btn h-btn bg-btn rounded-2xl"}>
           <button
-            onClick={() => router.push("/letterSearch")}
+            onClick={() => router.push("/postBoxSearch")}
             className={`w-[20.125rem] h-[3.625rem] text-[#FFF9E4] rounded-2xl border-dashed border-btnborder border-2 bg-btn m-[0.19rem]`}
           >
             다른 우체통 찾기

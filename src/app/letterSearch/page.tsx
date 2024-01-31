@@ -1,12 +1,11 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 export default function LetterSearch() {
   const router = useRouter();
-  const pathName = usePathname();
-  const searchParams = useSearchParams();
+
   const [postName, setPostName] = useState<String>("");
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPostName(e.target.value);
