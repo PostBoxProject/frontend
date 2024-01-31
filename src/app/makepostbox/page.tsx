@@ -30,7 +30,7 @@ export default function Letter() {
   const onChangePWD = (e: ChangeEvent<HTMLInputElement>) => {
     setPostboxinfo((prev) => ({
       ...prev,
-      pwd: e.target.value,
+      password: e.target.value,
     }));
   };
   const onChangeCheck = (e: ChangeEvent<HTMLInputElement>) => {
