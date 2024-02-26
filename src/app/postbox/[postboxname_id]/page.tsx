@@ -3,14 +3,16 @@ import Image from "next/image";
 
 import { ChangeEvent, useState } from "react";
 
-export default function Page({ params }: { params: { postboxname: string } }) {
-  const postName = decodeURI(params.postboxname);
+export default function Page({ params }: { params: { postboxname_id: string } }) {
+  const postName = decodeURI(params.postboxname_id);  
   const [id, name] = postName.split("-");
   const [isOpen, setIsopen] = useState(false);
   const [content, setContent] = useState("hi");
   const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
   };
+  
+
   const onClick = () => {
     setIsopen((prev) => {
       return !prev;
@@ -35,9 +37,11 @@ export default function Page({ params }: { params: { postboxname: string } }) {
   };
   return (
     <div className="flex flex-col items-center mt-[6em]">
-      <div className="mb-[1.3rem] mt-[1.2rem] text-[#BA4040] text-[1.75rem] font-[700]  h-[2.6875rem]">
+
+      <div className="mb-[1.3rem] mt-[1.2rem] text-[#BA4040] text-[1.75rem] font-[700]  h-[2.6875rem]">        
         {name} 의 postbox입니다.
       </div>
+
       <Image
         className="ml-[5rem] mr-[5.5rem]"
         src={"/postbox.svg"}
@@ -45,14 +49,10 @@ export default function Page({ params }: { params: { postboxname: string } }) {
         width={220}
         height={270}
       ></Image>
-      <div
-        className={"w-full flex flex-col gap-[1.25rem] mt-[39px] items-center"}
-      >
+
+      <div className={"w-full flex flex-col gap-[1.25rem] mt-[39px] items-center"}>
         <div className={"w-btn h-btn bg-btn rounded-2xl"}>
-          <button
-            onClick={onClick}
-            className={`w-[20.125rem] h-[3.625rem]  text-[#FFF9E4] rounded-2xl border-dashed border-btnborder border-2 bg-btn m-[0.19rem]`}
-          >
+          <button onClick={onClick} className={`w-[20.125rem] h-[3.625rem]  text-[#FFF9E4] rounded-2xl border-dashed border-btnborder border-2 bg-btn m-[0.19rem]`}>
             편지 쓰기
           </button>
         </div>
@@ -63,10 +63,8 @@ export default function Page({ params }: { params: { postboxname: string } }) {
               placeholder="편지를 작성해주세요"
               onChange={onChange}
             ></textarea>
-            <button
-              onClick={onClick}
-              className="absolute top-[-1rem] right-[-1rem]"
-            >
+
+            <button onClick={onClick} className="absolute top-[-1rem] right-[-1rem]">
               <Image
                 alt="closeBTN"
                 src="/xBTN.svg"
@@ -74,6 +72,7 @@ export default function Page({ params }: { params: { postboxname: string } }) {
                 height={45}
               ></Image>
             </button>
+
             <button
               onClick={onSend}
               className="mt-2 h-[2.6rem] border-dashed border-btnborder  text-[#FFF9E4] rounded-xl border-2 bg-btn m-[0.19rem]"
@@ -83,7 +82,9 @@ export default function Page({ params }: { params: { postboxname: string } }) {
           </div>
         ) : null}
       </div>
+
       <div className="bg-sub w-full bottom-0 absolute z-[-1] t-[30rem] h-[30rem]"></div>
+      
     </div>
   );
 }
